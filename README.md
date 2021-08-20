@@ -1,5 +1,4 @@
 # Instruction
-# Stack
 - Python 3.8
 - Django 3.1
 - NodeJS 12
@@ -13,30 +12,27 @@
  - Docker-compose
  - tmux and tmuxinator (optional)
 
-# Runserver
-- `chmod +x ./scripts/wait-for-it.sh`
-- `chmod +x ./scripts/wait-for-postgres.sh`
-- Change file 'docker-compose.override.yml' file this line
-  ```yml
-    django:
-      ...
-      extra_hosts:
-      - hsm1.codium.co:<YOUR COMPUTER IP>
-      - hsm2.codium.co:<YOUR COMPUTER IP>
+# SSH เข้าใช้งาน Server
+- IP
+- Port
+
+# สร้าง Username
+- `cd poc-certificate_management`
+- `cd django`
+- คำสั่งสำหรับการสร้าง Username `docker-compose exec django python manage.py createsuperuser`
+  ```ตัวอย่าง
+     Username (leave blank to use 'root'): <ชื่อผู้ใช้งาน>
+     Email address: <อีเมล>
+     Password: <รหัสผ่าน>
+     Password (again): <ยืนยันรหัสผ่าน>
+     Superuser created successfully.
   ```
-- Open file 'django/main/apps/grpc/connector.py' and change GRPC_SERVER port to 50051
-  ```py
-  self.GRPC_SERVER = f'{settings.GRPC_SERVER_IP}:50051'
+![alt text](https://www.img.in.th/images/9644b6166504079ad991ba643abba0d2.png)
+- คำสั่งสำหรับการเปลี่ยน Password `docker-compose exec django python manage.py changepassword`
+  ```ตัวอย่าง
+     Changing Password for user 'root'
+     Password: <รหัสผ่าน>
+     Password (again): <ยืนยันรหัสผ่าน>
+     Password success for user 'root'
   ```
-- Open 4 terminals and follow command in '.tmuxinator.yml' file or run `mux .` (if you have tmux and tmuxinator)
-
-# Deployment
-You have to deploy manually because it need VPN access.
-https://coda.io/d/DDoc_dwheJPuKQwm/POC-EGAT_suMHo#_luILu
-
-# backend shell
-`docker run -it --expose 8000 -w /opt/app -v $(pwd)/django:/opt/app python:3.8-alpine sh`
-
-# frontend shell
-`docker run -it --expose 4200 -w /opt/app -v $(pwd)/angular:/opt/app node:12.18.1-alpine sh`
-
+![alt text](https://www.img.in.th/images/f13cefff15fc4831540326bb4f053b8e.png)
