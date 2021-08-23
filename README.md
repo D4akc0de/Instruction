@@ -12,10 +12,6 @@
  - Docker-compose
  - tmux and tmuxinator (optional)
 
-# SSH เข้าใช้งาน Server
-- IP
-- Port
-
 # สร้าง Username
 - `cd poc-certificate_management`
 - `cd django`
